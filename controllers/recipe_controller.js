@@ -22,7 +22,7 @@ module.exports = {
       error: false,
     };
     try {
-      const recipe = new recipe({
+      const Recipe = new recipe({
         recipe_title: req.body.recipe_title,
         recipe_content: req.body.recipe_content,
         recipe_image: req.body.recipe_image,
@@ -31,8 +31,8 @@ module.exports = {
         recipe_prep_time: req.body.recipe_prep_time,
         number_of_people: req.body.number_of_people,
       });
-      await recipe.save();
-      resContent.recipe = recipe;
+      await Recipe.save();
+      resContent.recipe = Recipe;
     } catch (error) {
       resContent.error = true;
       resContent.message = error.message;
