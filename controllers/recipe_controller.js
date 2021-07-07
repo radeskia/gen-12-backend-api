@@ -3,21 +3,18 @@ const recipe = require("../models/recipe");
 
 module.exports = {
   get_recipes: async (req, res) => {
-    const resContent = {
-      error: false,
-    };
+    let resContent = [];
 
     try {
-      resContent.recipes = await recipe.find();
+      resContent = await recipe.find();
     } catch (error) {
-      resContent.error = true;
-      resContent.message = error.message;
+      resContent[0] = `Error: ${error.message}`;
     }
 
     res.json(resContent);
   },
   create_recipe: async (req, res) => {
-    const resContent = {
+    const responseData = {
       message: "Recipe created!",
       error: false,
     };
@@ -32,11 +29,11 @@ module.exports = {
         number_of_people: req.body.number_of_people,
       });
       await Recipe.save();
-      resContent.recipe = Recipe;
+      responseData.recipe = Recipe;
     } catch (error) {
-      resContent.error = true;
-      resContent.message = error.message;
+      responseData.error = true;
+      responseData.message = error.message;
     }
-    res.json(resContent);
+    res.json(responseData);
   },
 };
