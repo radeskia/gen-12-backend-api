@@ -13,6 +13,50 @@ module.exports = {
 
     res.json(resContent);
   },
+  get_breakfast: async (req, res) => {
+    let resContent = [];
+
+    try {
+      resContent = await recipe.find({ recipe_category:'breakfast' });
+    } catch (error) {
+      resContent[0] = `Error: ${error.message}`;
+    }
+
+    res.json(resContent);
+  },
+  get_brunch: async (req, res) => {
+    let resContent = [];
+
+    try {
+      resContent = await recipe.find({ recipe_category:'brunch' });
+    } catch (error) {
+      resContent[0] = `Error: ${error.message}`;
+    }
+
+    res.json(resContent);
+  },
+  get_lunch: async (req, res) => {
+    let resContent = [];
+
+    try {
+      resContent = await recipe.find({ recipe_category:'lunch' });
+    } catch (error) {
+      resContent[0] = `Error: ${error.message}`;
+    }
+
+    res.json(resContent);
+  },
+  get_dinner: async (req, res) => {
+    let resContent = [];
+
+    try {
+      resContent = await recipe.find({ recipe_category:'breakfast' });
+    } catch (error) {
+      resContent[0] = `Error: ${error.message}`;
+    }
+
+    res.json(resContent);
+  },
   create_recipe: async (req, res) => {
     const responseData = {
       message: "Recipe created!",

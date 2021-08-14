@@ -12,7 +12,7 @@ const Recipe = mongoose.Schema({
   },
   recipe_image: {
     type: String,
-    required: [true, "Recipe content is required!"]
+    required: [true, "Recipe content is required!"],
   },
   recipe_category: {
     type: String,
@@ -28,7 +28,15 @@ const Recipe = mongoose.Schema({
   },
   number_of_people: {
     type: Number,
-    required: [true, "Number of people recipe is intended for is required!"]
+    required: [true, "Number of people recipe is intended for is required!"],
+  },
+  stars: {
+    type: Number,
+    default: 0,
+  },
+  date: {
+    type: String,
+    default: new Date().toLocaleDateString()
   },
 });
 
