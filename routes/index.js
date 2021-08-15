@@ -6,17 +6,22 @@ const cors = require("cors");
 
 router
 //Recipe routes
-  .get("/recipes", cors(), recipe_controller.get_recipes)
-  .get("/breakfast", cors(), recipe_controller.get_breakfast)
-  .get("/brunch", cors(), recipe_controller.get_brunch)
-  .get("/lunch", cors(), recipe_controller.get_lunch)
-  .get("/dinner", cors(), recipe_controller.get_dinner)
-  .post("/create", recipe_controller.create_recipe)
-  // .delete("/recipes/:id", recipe_controller.delete_recipe);
+  .get("/", cors(), recipe_controller.fetchRecipes)
+  .get("/breakfast", cors(), recipe_controller.fetchBreakfast)
+  .get("/brunch", cors(), recipe_controller.fetchBrunch)
+  .get("/lunch", cors(), recipe_controller.fetchLunch)
+  .get("/dinner", cors(), recipe_controller.fetchDinner)
+  .get("/recipe/:id", cors(), recipe_controller.fetchSpecific)
+  .post("/create", cors(), recipe_controller.createRecipe)
+  .delete("/:id", cors(), recipe_controller.deleteRecipe)
+  .patch("/star/:id", cors(), recipe_controller.starRecipe)
+  .patch("/unstar/:id", cors(), recipe_controller.unstarRecipe)
   
 //User routes  
   .post("/register", cors(), user_controller.register)
   .post("/login", cors(), user_controller.login)
+
+
   //Override express default search for favicons
   .get("/favicon.ico", (req, res) => {
     res.sendStatus(204);

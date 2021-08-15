@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const recipe = require("../models/recipe");
 
 module.exports = {
-  get_recipes: async (req, res) => {
+  fetchRecipes: async (req, res) => {
     let resContent = [];
 
     try {
@@ -13,51 +13,62 @@ module.exports = {
 
     res.json(resContent);
   },
-  get_breakfast: async (req, res) => {
+  fetchBreakfast: async (req, res) => {
     let resContent = [];
 
     try {
-      resContent = await recipe.find({ recipe_category:'breakfast' });
+      resContent = await recipe.find({ recipe_category: "Breakfast" });
     } catch (error) {
       resContent[0] = `Error: ${error.message}`;
     }
 
     res.json(resContent);
   },
-  get_brunch: async (req, res) => {
+  fetchBrunch: async (req, res) => {
     let resContent = [];
 
     try {
-      resContent = await recipe.find({ recipe_category:'brunch' });
+      resContent = await recipe.find({ recipe_category: "Brunch" });
     } catch (error) {
       resContent[0] = `Error: ${error.message}`;
     }
 
     res.json(resContent);
   },
-  get_lunch: async (req, res) => {
+  fetchLunch: async (req, res) => {
     let resContent = [];
 
     try {
-      resContent = await recipe.find({ recipe_category:'lunch' });
+      resContent = await recipe.find({ recipe_category: "Lunch" });
     } catch (error) {
       resContent[0] = `Error: ${error.message}`;
     }
 
     res.json(resContent);
   },
-  get_dinner: async (req, res) => {
+  fetchDinner: async (req, res) => {
     let resContent = [];
 
     try {
-      resContent = await recipe.find({ recipe_category:'breakfast' });
+      resContent = await recipe.find({ recipe_category: "Dinner" });
     } catch (error) {
       resContent[0] = `Error: ${error.message}`;
     }
 
     res.json(resContent);
   },
-  create_recipe: async (req, res) => {
+  fetchSpecific: async (req, res) => {
+    let resContent = [];
+
+    try {
+      resContent = await recipe.findById(req.params.id);
+    } catch (error) {
+      resContent[0] = `Error: ${error.message}`;
+    }
+
+    res.json(resContent);
+  },
+  createRecipe: async (req, res) => {
     const responseData = {
       message: "Recipe created!",
       error: false,
@@ -79,5 +90,47 @@ module.exports = {
       responseData.message = error.message;
     }
     res.json(responseData);
+  },
+  deleteRecipe: async (req, res) => {
+    let resContent = [];
+
+    try {
+      resContent = await recipe.findByIdAndDelete(req.params.id);
+    } catch (error) {
+      resContent[0] = `Error: ${error.message}`;
+    }
+
+    res.json(resContent);
+  },
+  starRecipe: async (req, res) => {
+    let resContent = [];
+    try {
+      const toStar = await recipe.findById(req.params.id);
+      const Recipe = await recipe.findOneAndUpdate(
+        { _id: req.params.id },
+        { stars: toStar.stars + 1 },
+        { new: true }
+      );
+      resContent.push(Recipe);
+    } catch (error) {
+      resContent[0] = `Error: ${error.message}`;
+    }
+
+    res.json(resContent);
+  },
+  unstarRecipe: async (req, res) => {
+    let resContent = [];
+    try {
+      const toUnstar = await recipe.findById(req.params.id);
+      const Recipe = await recipe.findOneAndUpdate(
+        { _id: req.params.id },
+        { stars: toUnstar.stars - 1 },
+        { new: true }
+      );
+      resContent.push(Recipe);
+    } catch (error) {
+      resContent[0] = `Error: ${error.message}`;
+    }
+    res.json(resContent);
   },
 };
