@@ -15,8 +15,14 @@ mongoose.connect(`${process.env.MONGO_URL}`, {
   useCreateIndex: true,
 });
 
+app.use(cookieParser());
+
 app.use(
-  jwt({ secret: `${process.env.AUTH_SECRET}`, algorithms: ["HS256"] }).unless({
+  jwt({
+    secret: `${process.env.AUTH_SECRET}`,
+    getToken: (req) => req.cookies.token,
+    algorithms: ["HS256"],
+  }).unless({
     path: [
       {
         url: "/",
@@ -58,7 +64,6 @@ app.use(cors());
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use("/", indexRouter);
 
 module.exports = app;
