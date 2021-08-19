@@ -56,6 +56,14 @@ app.use(
         url: "/login",
         methods: ["POST"],
       },
+      {
+        url: "/latest",
+        methods: ["GET"],
+      },
+      {
+        url: "/popular",
+        methods: ["GET"],
+      },
     ],
   })
 );

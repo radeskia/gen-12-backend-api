@@ -68,6 +68,28 @@ module.exports = {
 
     res.json(resContent);
   },
+  fetchPopular: async (req, res) => {
+    let resContent = [];
+
+    try {
+      resContent = await recipe.find().sort({ stars: -1 }).limit(3);
+    } catch (error) {
+      resContent[0] = `Error: ${error.message}`;
+    }
+
+    res.json(resContent);
+  },
+  fetchLatest: async (req, res) => {
+    let resContent = [];
+
+    try {
+      resContent = await recipe.find().sort({ _id: -1 }).limit(3);
+    } catch (error) {
+      resContent[0] = `Error: ${error.message}`;
+    }
+
+    res.json(resContent);
+  },
   createRecipe: async (req, res) => {
     const responseData = {
       message: "Recipe created!",
