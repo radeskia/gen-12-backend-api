@@ -12,7 +12,7 @@ const Recipe = mongoose.Schema({
   },
   recipe_image: {
     type: String,
-    required: [true, "Recipe content is required!"],
+    required: [true, "Recipe image is required!"],
   },
   recipe_category: {
     type: String,
@@ -38,6 +38,10 @@ const Recipe = mongoose.Schema({
     type: String,
     default: new Date().toLocaleDateString()
   },
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users'
+  }
 });
 
 module.exports = mongoose.model("Recipe", Recipe);

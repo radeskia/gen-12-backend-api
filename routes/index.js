@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 const recipe_controller = require("../controllers/recipe_controller");
 const user_controller = require("../controllers/user_controller")
+const cors = require("cors");
 
 router
 //Recipe routes
@@ -22,6 +23,7 @@ router
   .post("/register", user_controller.register)
   .post("/login", user_controller.login)
   .get("/logout", user_controller.logout)
+  .get("/username",user_controller.fetchUsername)
 
   //Override express default search for favicons
   .get("/favicon.ico", (req, res) => {
