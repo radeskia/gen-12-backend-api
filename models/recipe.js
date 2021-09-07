@@ -39,8 +39,8 @@ const Recipe = mongoose.Schema({
     default: new Date().toLocaleDateString()
   },
   author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'users'
+    type: String,
+    required: [true, "Author is required!"],
   }
 });
 

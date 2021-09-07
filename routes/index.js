@@ -14,6 +14,7 @@ router
   .get("/recipe/:id", recipe_controller.fetchSpecific)
   .get("/popular", recipe_controller.fetchPopular)
   .get("/latest", recipe_controller.fetchLatest)
+  .get("/myrecipes/:id", recipe_controller.fetchByUser)
   .post("/create", recipe_controller.createRecipe)
   .delete("/:id", recipe_controller.deleteRecipe)
   .patch("/star/:id", recipe_controller.starRecipe)

@@ -61,14 +61,17 @@ module.exports = {
           email: User.email,
         };
         const token = jwt.sign(payload, process.env.AUTH_SECRET, {
-          expiresIn: "120m",
+          expiresIn: "24h",
         });
 
         responseData.error = false;
         responseData.message = "Login successful!";
         responseData.token = token;
 
-        res.cookie("token", token, { httpOnly: true, maxAge: 24 * 60 * 1000 }),
+        res.cookie("token", token, {
+          httpOnly: true,
+          maxAge: 30 * 24 * 60 * 60 * 1000,
+        }),
           res.json(responseData);
       } else {
         responseData.error = true;

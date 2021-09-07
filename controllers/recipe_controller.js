@@ -104,6 +104,7 @@ module.exports = {
         recipe_description: req.body.recipe_description,
         recipe_prep_time: req.body.recipe_prep_time,
         number_of_people: req.body.number_of_people,
+        author: req.body.author
       });
       await Recipe.save();
       responseData.recipe = Recipe;
@@ -153,6 +154,17 @@ module.exports = {
     } catch (error) {
       resContent[0] = `Error: ${error.message}`;
     }
+    res.json(resContent);
+  },
+  fetchByUser: async (req, res) => {
+    let resContent = [];
+
+    try {
+      resContent = await recipe.find({ author: req.params.id });
+    } catch (error) {
+      resContent[0] = `Error: ${error.message}`;
+    }
+
     res.json(resContent);
   },
 };

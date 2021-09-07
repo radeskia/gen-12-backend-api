@@ -70,6 +70,9 @@ app.use(
       {
         url: "/popular",
         methods: ["GET"],
+      },      {
+        url: "/myrecipes",
+        methods: ["GET"],
       },
     ],
   })
