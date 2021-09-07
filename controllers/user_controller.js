@@ -42,6 +42,7 @@ module.exports = {
   login: async (req, res) => {
     const responseData = {
       message: `Loged in!`,
+      token: "",
       error: false,
     };
     try {
@@ -64,7 +65,8 @@ module.exports = {
         });
 
         responseData.error = false;
-        responseData.message = "Login successful! token = " + token;
+        responseData.message = "Login successful!";
+        responseData.token = token;
 
         res.cookie("token", token, { httpOnly: true, maxAge: 24 * 60 * 1000 }),
           res.json(responseData);
@@ -93,7 +95,6 @@ module.exports = {
     }
   },
   fetchUsername: async (req, res) => {
-
     try {
       const cookie = req.cookies["token"];
       const checked = jwt.verify(cookie, process.env.AUTH_SECRET);
@@ -107,7 +108,7 @@ module.exports = {
       const username = await user.findById(checked.id);
       res.json(username);
     } catch (error) {
-      res.json(error)
+      res.json(error);
       console.log(error);
     }
   },
