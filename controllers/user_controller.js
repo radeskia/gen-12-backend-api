@@ -97,22 +97,4 @@ module.exports = {
       res.json(responseData);
     }
   },
-  fetchUsername: async (req, res) => {
-    try {
-      const cookie = req.cookies["token"];
-      const checked = jwt.verify(cookie, process.env.AUTH_SECRET);
-
-      if (!checked) {
-        return res.status(401).send({
-          message: "Authentication error",
-        });
-      }
-
-      const username = await user.findById(checked.id);
-      res.json(username);
-    } catch (error) {
-      res.json(error);
-      console.log(error);
-    }
-  },
 };

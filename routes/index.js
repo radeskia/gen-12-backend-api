@@ -24,7 +24,6 @@ router
   .post("/register", user_controller.register)
   .post("/login", user_controller.login)
   .get("/logout", user_controller.logout)
-  .get("/username",user_controller.fetchUsername)
 
   //Override express default search for favicons
   .get("/favicon.ico", (req, res) => {
