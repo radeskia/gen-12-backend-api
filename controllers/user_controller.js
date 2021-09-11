@@ -41,7 +41,7 @@ module.exports = {
   },
   login: async (req, res) => {
     const responseData = {
-      message: `Loged in!`,
+      message: ``,
       token: "",
       error: false,
     };

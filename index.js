@@ -17,9 +17,6 @@ mongoose.connect(`${process.env.MONGO_URL}`, {
 app.use(cors());
 app.use(cookieParser());
 app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use("/", indexRouter);
 
 app.use(
   jwt({
@@ -51,9 +48,6 @@ app.use(
       {
         url: "/recipe",
         methods: ["GET"],
-      },      {
-        url: "/username",
-        methods: ["GET"],
       },
       {
         url: "/register",
@@ -70,13 +64,12 @@ app.use(
       {
         url: "/popular",
         methods: ["GET"],
-      },      {
-        url: "/myrecipes",
-        methods: ["GET"],
       },
     ],
   })
 );
-
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use("/", indexRouter);
 
 module.exports = app;
