@@ -54,7 +54,6 @@ module.exports = {
       }
 
       const passCheck = bcrypt.compareSync(req.body.password, User.password);
-
       if (passCheck) {
         const payload = {
           id: User._id,
@@ -95,6 +94,50 @@ module.exports = {
       responseData.error = true;
       responseData.message = error.message;
       res.json(responseData);
+    }
+  },
+  update: async (req, res) => {
+    const responseData = {
+      message: `User updated!`,
+      error: false,
+    };
+
+    try {
+      const User = await user.findOneAndReplace(
+        { _id: req.body.author },
+        {
+          avatar: req.body.avatar,
+          first_name: req.body.first_name,
+          last_name: req.body.last_name,
+          email: req.body.email,
+          birthday: req.body.birthday,
+          password: await bcrypt.hash(req.body.password, 5),
+        }
+      );
+      await User.save();
+      responseData.user = User;
+    } catch (error) {
+      responseData.error = true;
+      responseData.message = error.message;
+    }
+    res.json(responseData);
+  },
+  fetchUser: async (req, res) => {
+    try {
+      const cookie = req.cookies["token"];
+      const checked = jwt.verify(cookie, process.env.AUTH_SECRET);
+
+      if (!checked) {
+        return res.status(401).send({
+          message: "Authentication error",
+        });
+      }
+
+      const username = await user.findById(checked.id);
+      res.json(username.avatar);
+    } catch (error) {
+      res.json(error);
+      console.log(error);
     }
   },
 };

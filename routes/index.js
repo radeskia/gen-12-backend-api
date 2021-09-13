@@ -1,11 +1,11 @@
 var express = require("express");
 var router = express.Router();
 const recipe_controller = require("../controllers/recipe_controller");
-const user_controller = require("../controllers/user_controller")
+const user_controller = require("../controllers/user_controller");
 const cors = require("cors");
 
 router
-//Recipe routes
+  //Recipe routes
   .get("/", recipe_controller.fetchRecipes)
   .get("/breakfast", recipe_controller.fetchBreakfast)
   .get("/brunch", recipe_controller.fetchBrunch)
@@ -19,11 +19,13 @@ router
   .delete("/:id", recipe_controller.deleteRecipe)
   .patch("/star/:id", recipe_controller.starRecipe)
   .patch("/unstar/:id", recipe_controller.unstarRecipe)
-  
-//User routes  
+
+  //User routes
   .post("/register", user_controller.register)
   .post("/login", user_controller.login)
   .get("/logout", user_controller.logout)
+  .put("/update", user_controller.update)
+  .get("/:id", user_controller.fetchUser)
 
   //Override express default search for favicons
   .get("/favicon.ico", (req, res) => {
