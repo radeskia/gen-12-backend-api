@@ -16,7 +16,7 @@ mongoose.connect(`${process.env.MONGO_URL}`, {
   useCreateIndex: true,
 });
 
-app.use(express.static(path.resolve(__dirname, '../client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(cors());
 app.use(cookieParser());
 app.use(logger("dev"));
@@ -76,7 +76,7 @@ app.use(
 
 app.use("/", indexRouter);
 app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
 
 module.exports = app;
