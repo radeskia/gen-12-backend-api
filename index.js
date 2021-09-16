@@ -31,43 +31,43 @@ app.use(
   }).unless({
     path: [
       {
-        url: "/",
+        url: "/api",
         methods: ["GET"],
       },
       {
-        url: "/breakfast",
+        url: "/api/breakfast",
         methods: ["GET"],
       },
       {
-        url: "/brunch",
+        url: "/api/brunch",
         methods: ["GET"],
       },
       {
-        url: "/lunch",
+        url: "/api/lunch",
         methods: ["GET"],
       },
       {
-        url: "/dinner",
+        url: "/api/dinner",
         methods: ["GET"],
       },
       {
-        url: "/recipe",
+        url: "/api/recipe",
         methods: ["GET"],
       },
       {
-        url: "/register",
+        url: "/api/register",
         methods: ["POST"],
       },
       {
-        url: "/login",
+        url: "/api/login",
         methods: ["POST"],
       },
       {
-        url: "/latest",
+        url: "/api/latest",
         methods: ["GET"],
       },
       {
-        url: "/popular",
+        url: "/api/popular",
         methods: ["GET"],
       },
     ],

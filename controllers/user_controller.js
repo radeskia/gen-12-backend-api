@@ -50,7 +50,7 @@ module.exports = {
       if (!User) {
         responseData.error = true;
         responseData.message = `User not found!`;
-        res.json(responseData);
+        res.json(responseData).status(401);
       }
 
       const passCheck = bcrypt.compareSync(req.body.password, User.password);
@@ -134,7 +134,11 @@ module.exports = {
       }
 
       const username = await user.findById(checked.id);
-      res.json(username.avatar);
+      if (!username.avatar) {
+        return res.send({ message: "no image" });
+      } else {
+        res.json(username.avatar);
+      }
     } catch (error) {
       res.json(error);
       console.log(error);
