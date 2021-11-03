@@ -104,7 +104,7 @@ module.exports = {
         recipe_description: req.body.recipe_description,
         recipe_prep_time: req.body.recipe_prep_time,
         number_of_people: req.body.number_of_people,
-        author: req.body.author
+        author: req.body.author,
       });
       await Recipe.save();
       responseData.recipe = Recipe;
@@ -131,7 +131,7 @@ module.exports = {
       const toStar = await recipe.findById(req.params.id);
       const Recipe = await recipe.findOneAndUpdate(
         { _id: req.params.id },
-        { stars: toStar.stars + 1 },
+        { $push: { stars: req.params.user } },
         { new: true }
       );
       resContent.push(Recipe);
@@ -147,7 +147,7 @@ module.exports = {
       const toUnstar = await recipe.findById(req.params.id);
       const Recipe = await recipe.findOneAndUpdate(
         { _id: req.params.id },
-        { stars: toUnstar.stars - 1 },
+        { $pull: { stars: req.params.user } },
         { new: true }
       );
       resContent.push(Recipe);

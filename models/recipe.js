@@ -30,18 +30,15 @@ const Recipe = mongoose.Schema({
     type: Number,
     required: [true, "Number of people recipe is intended for is required!"],
   },
-  stars: {
-    type: Number,
-    default: 0,
-  },
+  stars: [],
   date: {
     type: String,
-    default: new Date().toLocaleDateString()
+    default: new Date().toLocaleDateString(),
   },
   author: {
     type: String,
     required: [true, "Author is required!"],
-  }
+  },
 });
 
 module.exports = mongoose.model("Recipe", Recipe);

@@ -17,8 +17,8 @@ router
   .get("/api/myrecipes/:id", recipe_controller.fetchByUser)
   .post("/api/create", recipe_controller.createRecipe)
   .delete("/api/:id", recipe_controller.deleteRecipe)
-  .patch("/api/star/:id", recipe_controller.starRecipe)
-  .patch("/api/unstar/:id", recipe_controller.unstarRecipe)
+  .patch("/api/star/:id/:user", recipe_controller.starRecipe)
+  .patch("/api/unstar/:id/:user", recipe_controller.unstarRecipe)
 
   //User routes
   .post("/api/register", user_controller.register)
