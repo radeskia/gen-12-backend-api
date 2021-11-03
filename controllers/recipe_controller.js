@@ -72,7 +72,7 @@ module.exports = {
     let resContent = [];
 
     try {
-      resContent = await recipe.find().sort({ stars: -1 }).limit(3);
+      resContent = await recipe.find().sort({'stars': -1}).limit(3);
     } catch (error) {
       resContent[0] = `Error: ${error.message}`;
     }
